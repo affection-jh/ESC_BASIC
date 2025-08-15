@@ -82,7 +82,12 @@ Widget _buildGuestLoginButton(BuildContext context) {
     padding: const EdgeInsets.all(4.0),
     child: GestureDetector(
       onTap: () async {
-        print("게스트로 로그인");
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SettingScreen(from: "onboarding"),
+          ),
+        );
       },
       child: Container(
         height: 56,

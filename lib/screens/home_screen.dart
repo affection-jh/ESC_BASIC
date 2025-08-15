@@ -1,3 +1,6 @@
+import 'package:esc/screens/entry_screen.dart';
+import 'package:esc/screens/setting_screen.dart';
+import 'package:esc/screens/view_swicher.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +16,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingScreen(from: "home"),
+                ),
+              );
+            },
+            icon: Icon(Icons.menu),
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -35,9 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               _buildTextSector(),
               _buildImageSector(),
-              _buildRoomCreationButton("게임 방 만들기", rebuild),
+              _buildRoomCreationButton("게임 방 만들기", createRoom),
               SizedBox(height: 10),
-              _buildJoinButton("게임 참여하기", rebuild),
+              _buildJoinButton("게임 참여하기", joinRoom),
             ],
           ),
         ),
@@ -45,8 +60,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void rebuild() {
-    setState(() {});
+  void createRoom() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ViewSwicher(gameState: "WAITING_ROOM"),
+      ),
+    );
+  }
+
+  void joinRoom() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => EntryScreen()),
+    );
   }
 }
 

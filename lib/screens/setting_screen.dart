@@ -1,7 +1,11 @@
+import 'package:esc/player.dart';
+import 'package:esc/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatefulWidget {
-  const SettingScreen({super.key});
+  SettingScreen({super.key, required this.from});
+
+  String from;
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -58,7 +62,17 @@ class _SettingScreenState extends State<SettingScreen> {
     }
   }
 
-  void onCompleted() {}
+  void onCompleted() {
+    Player.setNickName(controller.text);
+    if (widget.from == "main" || widget.from == "onboarding") {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } else {
+      Navigator.pop(context);
+    }
+  }
 }
 
 Widget _buildTextSector() {
